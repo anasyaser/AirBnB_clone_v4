@@ -24,23 +24,18 @@ def close_db(error):
 @app.route('/1-hbnb/', strict_slashes=False)
 def hbnb():
     """ HBNB is alive! """
-    # states = storage.all(State).values()
-    # states = sorted(states, key=lambda k: k.name)
+    states = storage.all(State).values()
+    states = sorted(states, key=lambda k: k.name)
     st_ct = []
 
-    # for state in states:
-    #     st_ct.append([state, sorted(state.cities, key=lambda k: k.name)])
+    for state in states:
+        st_ct.append([state, sorted(state.cities, key=lambda k: k.name)])
 
-    # amenities = storage.all(Amenity).values()
-    # amenities = sorted(amenities, key=lambda k: k.name)
-    amenities = []
-    for i in range(10):
-        new = Amenity()
-        new.name = str(i)
-        amenities.append(new)
-    # places = storage.all(Place).values()
-    # places = sorted(places, key=lambda k: k.name)
-    places = []
+    amenities = storage.all(Amenity).values()
+    amenities = sorted(amenities, key=lambda k: k.name)
+
+    places = storage.all(Place).values()
+    places = sorted(places, key=lambda k: k.name)
     return render_template('1-hbnb.html',
                            states=st_ct,
                            amenities=amenities,
@@ -50,4 +45,4 @@ def hbnb():
 
 if __name__ == "__main__":
     """ Main Function """
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000)

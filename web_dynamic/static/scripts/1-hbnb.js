@@ -1,15 +1,20 @@
 $(function () {
+    let id_name = {};
     $('.amenities .popover input').change(function() {
-	let id_name = {};
 	if(this.checked) {
 	    id_name[$(this).attr('data-id')] = $(this).parent().text();
 	} else {
 	    delete id_name[$(this).attr('data-id')];
 	}
-	// issue when uncheck box (not removed from h4) how to fix this?
+	$('.amenities h4').text("");
+	let count = 0;
 	for (let key in id_name) {
-	    $('.amenities h4').append(id_name[key] + ', ');
+	    count += 1;
+	    if (count < 4) {
+		$('.amenities h4').append(id_name[key] + ', ');
+	    } else if (count === 4){
+		$('.amenities h4').append('...');
+	    }
 	}
-
-    })
+    });
 });
